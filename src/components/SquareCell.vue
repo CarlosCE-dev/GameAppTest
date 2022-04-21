@@ -6,17 +6,31 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 // Models
-import type { ICell } from '@/models/ICell';
+import { watch, computed, defineComponent, type PropType } from 'vue';
 import { useCell } from '../composables/useCell';
+import type { ICell } from '../models/ICell';
 
 interface Props {
     cell: ICell
 }
-const { cell } = defineProps<Props>();
 
-const { styleCell } = useCell(cell);
+export default defineComponent({
+    props: {
+      cell: { type: Object as PropType<ICell>, required: true }  
+    },
+    setup(props) {
+        const { styleCell } = useCell(props.cell);
+
+        return {
+            styleCell
+        }
+    }
+})
+
+
+
 </script>
 
 <style scoped>

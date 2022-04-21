@@ -1,16 +1,19 @@
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import type { ICell } from '@/models/ICell';
 
 
-export const useCell = (cell:ICell) => {
-    const position = computed(() => {
-        return { left: cell.left * 50, top: cell.top * 50 }
-    });
+export const useCell = (item:ICell) => {
+    const cell = reactive(item);
 
-    const styleCell = reactive({
-        left: `${position.value.left}px`,
-        top: `${position.value.top}px`
-    })
+    const styleCell = computed(() => {
+        const position = {
+            left: cell.left * 50, top: cell.top * 50 
+        };
+        return {
+            left: `${position.left}px`,
+            top: `${position.top}px`
+        };
+    });
 
     return {
         styleCell

@@ -1,30 +1,36 @@
 <template>
-    <div class="grid">
+    <div class="grid" v-if="cells">
         <SquareCell v-for="(item) in cells" :cell="item" :key="item.id"/>
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import SquareCell from "./SquareCell.vue";
+import { useGameStore } from '../stores/game';
+import { storeToRefs } from "pinia";
+import { defineComponent, computed } from 'vue';
 import type { ICell } from '@/models/ICell';
 
-const cells:ICell[] = [
-    {
-        id: 1,
-        top: 0,
-        left: 0
+export default defineComponent({
+    components: {
+        SquareCell,
     },
-    {
-        id: 1,
-        top: 1,
-        left: 2
-    },
-    {
-        id: 1,
-        top: 5,
-        left: 9
+    setup() {
+        
+        const store = useGameStore();
+        
+        const { cells } = storeToRefs(store);
+        const { randomizePositions } = store;
+
+        setInterval(() => {
+            randomizePositions();
+        }, 200);
+
+        return {
+            cells
+        }
     }
-];
+})
 </script>
 
 <style scoped>
