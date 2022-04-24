@@ -1,33 +1,53 @@
 import { randomPositions } from "@/helpers/random";
 import type { ICell } from "@/models/ICell";
 import type { IFood } from "@/models/IFood";
+import { checkPosition } from '../helpers/engine';
 
-const cellItems = 5,
-    foodItems = 3;
+const cellItems = 20,
+    foodItems = 5;
 
-export const generateCells = () => {
-    let id = 1;
-    return new Array(cellItems).fill("").map(() => {
-        const [left, top] = randomPositions();  
+export const generateData = () => {
+    const cells:ICell[] = [], 
+        foods:IFood[] = [];
+    let items = new Array(cellItems).fill("");
+
+    for (let _ of items) {
+        let left, top;
+        const currentPositions = cells.map(c => parseInt(`${c.left}${c.top}`));
+        do {
+            [left, top] = randomPositions(); 
+        } while (checkPosition(parseInt(`${left}${top}`), currentPositions));
+
         const cell:ICell = {
-            id,
+            id: cells.length + 1,
             top,
-            left
+            left,
+            level: 1
         }
-        id++
-        return cell;
-    });
-}
-export const generateFoods = () => {
-    let id = 1;
-    return new Array(foodItems).fill("").map(() => {
-        const [left, top] = randomPositions();  
+        cells.push(cell);
+    }
+
+    items = new Array(foodItems).fill("");
+    const currentCellsPosition = cells.map(c => parseInt(`${c.left}${c.top}`));
+
+    for (let _ of items) {
+        let left, top;
+        const currentPositions = [...currentCellsPosition, ...foods.map(c => parseInt(`${c.left}${c.top}`))];
+        do {
+            [left, top] = randomPositions();
+        } while (checkPosition(parseInt(`${left}${top}`), currentPositions));
+
         const food:IFood = {
-            id,
+            id: foods.length + 1,
             top,
             left
         }
-        id++;
-        return food;
-    });
+        foods.push(food);
+    }
+
+    return {
+        cells,
+        foods
+    }
 }
+

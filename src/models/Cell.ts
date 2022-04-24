@@ -4,6 +4,7 @@ import type { ICell } from "./ICell";
  * Cell/Player in the grid
  */
 export class Cell implements ICell {
+    level: number = 0;
     /**
      * Basic identifier of the cell
      */

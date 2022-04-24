@@ -1,16 +1,18 @@
 import { defineStore } from 'pinia'
-import { generateFoods, generateCells } from '../data/db';
+import { generateData } from '../data/db';
 import { getNextPositions } from '../helpers/movement';
+import { checkAllCellsPositions } from '../helpers/engine';
 
 export const useGameStore = defineStore({
     id: 'game',
     state: () => ({
-        cells: generateCells(),
-        foods: generateFoods()
+        ...generateData(),
     }),
     actions: {
         randomizePositions(){
-            this.cells = getNextPositions(this.cells);
+            const {cells, foods} = checkAllCellsPositions(getNextPositions(this.cells), this.foods);
+            this.cells = cells;
+            this.foods = foods;
         }
     }
 })

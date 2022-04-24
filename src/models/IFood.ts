@@ -1,17 +1,10 @@
+import type { IMovement } from './IMovement';
 /**
  * Basic interface for a food
  */
-export interface IFood {
+export interface IFood  extends IMovement {
     /**
      * Basic identifier of the food
      */
      id: number;
-     /**
-      * The top position of the food in the grid
-      */
-     top: number;
-     /**
-      * The left position of the food in the grid
-      */
-     left: number;
 }

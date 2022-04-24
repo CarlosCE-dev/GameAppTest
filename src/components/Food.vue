@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts">
-import { useCell } from '../composables/useCell';
-import type { ICell } from '../models/ICell';
+import type { IFood } from '@/models/IFood';
+import { useMovement } from '../composables/useMovement';
 
-const { cell } = defineProps<{
-  cell: ICell
+const { food } = defineProps<{
+  food: IFood
 }>()
 
-const { styleCell } = useCell(cell);
+const { styleCell } = useMovement(food);
 </script>
 
 <style scoped>

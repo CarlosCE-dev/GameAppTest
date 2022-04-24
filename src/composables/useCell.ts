@@ -1,25 +1,25 @@
-import { computed, reactive } from 'vue';
+import { computed, ref } from 'vue';
+import { convertToRoman } from '../helpers/number';
 import type { ICell } from '@/models/ICell';
 
 /**
- * Custom hook use to set the position of the cell in the grid
+ * Custom hook use to set the information for a cell/player
  * @param item The ICell item 
  * @returns Returns the style of cell
  */
 export const useCell = (item:ICell) => {
-    const cell = reactive(item);
-
-    const styleCell = computed(() => {
-        const position = {
-            left: cell.left * 50, top: cell.top * 50 
-        };
-        return {
-            left: `${position.left}px`,
-            top: `${position.top}px`
-        };
-    });
+    /**
+     * Reactive item
+     */
+    const cell = ref(item);
+    /**
+     * Current level of the cell
+     */
+    const currentLevel = computed(() => {
+        return convertToRoman(cell.value.level);
+    })
 
     return {
-        styleCell
+        currentLevel
     }
 }
