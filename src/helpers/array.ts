@@ -1,4 +1,3 @@
-
 /**
  * Receives a array and shuffle all the collection
  * @param array A collection provided
@@ -11,14 +10,12 @@
         swap(array, number, --last);
     }
 }
-
 /**
  * Returns a random number
  * @param number Number provided
  * @returns Return random number
  */
 const randomNumber = (number:number) => Math.floor(Math.random() * number);
-
 /**
  * Swap elements in a array provided
  * @param array Any array
@@ -32,7 +29,6 @@ const swap = (array:any, number:number, last:number) => {
     array[last] = element;
     return element;
 }
-
 export {
     shuffleArray
 }

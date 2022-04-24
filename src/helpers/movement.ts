@@ -1,7 +1,6 @@
 import type { ICell } from '../models/ICell';
 import { directionTypes } from '../enum/directions';
 import { getNextRandomPosition } from './random';
-
 /**
  * Change all the position of the cells
  * @param cells Collections of cells
@@ -12,7 +11,6 @@ export const getNextPositions = (cells:ICell[]) => {
         return setNewPosition(c);
     });
 }
-
 /**
  * Set a new position of a cell
  * @param cell The cell

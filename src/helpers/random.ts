@@ -3,6 +3,11 @@ import { directionTypes } from '../enum/directions';
 import { shuffleArray } from './array';
 
 /**
+ * Global variables
+ */
+const totalHeight = 17,
+    totalWidth = 9;
+/**
  * Gets next random position of cell
  * @param cell 
  * @returns 
@@ -12,10 +17,6 @@ export const getNextRandomPosition = (cell:ICell) => {
     shuffleArray(directionTypes);
     return directions[Math.floor(Math.random() * directions.length)];
 }
-
-const totalHeight = 17,
-    totalWidth = 9;
-
 /**
  * Get a direction available for a cell
  * @param cell The cell
@@ -33,7 +34,11 @@ const getDirectionsAvailable = (cell:ICell) => {
     else 
         return [directionTypes.right, directionTypes.down, directionTypes.up, directionTypes.left];
 }
-
+/**
+ * Decides position on left
+ * @param top The current top position
+ * @returns A new position movement
+ */
 const decideLeft = (top:number) => {
     if (top === 0)
         return [directionTypes.right, directionTypes.down];
@@ -42,7 +47,11 @@ const decideLeft = (top:number) => {
     else 
         return  [directionTypes.right, directionTypes.down, directionTypes.up];
 }
-
+/**
+ * Decides position on right
+ * @param top The current top position
+ * @returns A new position movement
+ */
 const decideRight = (top:number) => {
     if (top === 0)
         return [directionTypes.left, directionTypes.down];
@@ -51,7 +60,11 @@ const decideRight = (top:number) => {
     else 
         return  [directionTypes.left, directionTypes.down, directionTypes.up];
 }
-
+/**
+ * Decides position on tio
+ * @param left The current left position
+ * @returns A new position movement
+ */
 const decideTop = (left:number) => {
     if (left === 0)
         return [directionTypes.down, directionTypes.left];
@@ -60,7 +73,11 @@ const decideTop = (left:number) => {
     else 
         return  [directionTypes.down, directionTypes.right, directionTypes.left];
 }
-
+/**
+ * Decides position on down
+ * @param left The current left position
+ * @returns A new position movement
+ */
 const decideDown = (left:number) => {
     if (left === 0)
         return [directionTypes.up, directionTypes.left];
