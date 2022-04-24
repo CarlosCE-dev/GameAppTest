@@ -2,6 +2,11 @@ import type { ICell } from '../models/ICell';
 import { directionTypes } from '../enum/directions';
 import { shuffleArray } from './array';
 
+/**
+ * Gets next random position of cell
+ * @param cell 
+ * @returns 
+ */
 export const getNextRandomPosition = (cell:ICell) => {
     const directions = getDirectionsAvailable(cell);
     shuffleArray(directionTypes);
@@ -11,6 +16,11 @@ export const getNextRandomPosition = (cell:ICell) => {
 const totalHeight = 17,
     totalWidth = 9;
 
+/**
+ * Get a direction available for a cell
+ * @param cell The cell
+ * @returns A new direction type available
+ */
 const getDirectionsAvailable = (cell:ICell) => {
     if (cell.left === 0) 
         return decideLeft(cell.top);

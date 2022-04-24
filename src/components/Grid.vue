@@ -4,33 +4,19 @@
     </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import SquareCell from "./SquareCell.vue";
 import { useGameStore } from '../stores/game';
 import { storeToRefs } from "pinia";
-import { defineComponent, computed } from 'vue';
-import type { ICell } from '@/models/ICell';
 
-export default defineComponent({
-    components: {
-        SquareCell,
-    },
-    setup() {
+const store = useGameStore();
         
-        const store = useGameStore();
-        
-        const { cells } = storeToRefs(store);
-        const { randomizePositions } = store;
+const { cells } = storeToRefs(store);
+const { randomizePositions } = store;
 
-        setInterval(() => {
-            randomizePositions();
-        }, 200);
-
-        return {
-            cells
-        }
-    }
-})
+setInterval(() => {
+    randomizePositions();
+}, 2000);
 </script>
 
 <style scoped>
