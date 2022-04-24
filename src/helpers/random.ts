@@ -17,6 +17,12 @@ export const getNextRandomPosition = (cell:ICell) => {
     shuffleArray(directionTypes);
     return directions[Math.floor(Math.random() * directions.length)];
 }
+export const randomPositions = () => {
+    return [
+        Math.floor(Math.random() * (totalWidth - 0 + 1)) + 0,
+        Math.floor(Math.random() * (totalHeight - 0 + 1)) + 0
+    ]
+}
 /**
  * Get a direction available for a cell
  * @param cell The cell

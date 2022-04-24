@@ -1,39 +1,33 @@
+import { randomPositions } from "@/helpers/random";
 import type { ICell } from "@/models/ICell";
+import type { IFood } from "@/models/IFood";
 
-export const cells:ICell[] = [
-    {
-        id: 1,
-        top: 0,
-        left: 0
-    },
-    {
-        id: 2,
-        top: 1,
-        left: 2
-    },
-    {
-        id: 3,
-        top: 9,
-        left: 9
-    },
-    {
-        id: 4,
-        top: 15,
-        left: 9
-    },
-    {
-        id: 5,
-        top: 4,
-        left: 4
-    },
-    {
-        id: 6,
-        top: 7,
-        left: 7
-    },
-    {
-        id: 7,
-        top: 9,
-        left: 2
-    }
-];
+const cellItems = 5,
+    foodItems = 3;
+
+export const generateCells = () => {
+    let id = 1;
+    return new Array(cellItems).fill("").map(() => {
+        const [left, top] = randomPositions();  
+        const cell:ICell = {
+            id,
+            top,
+            left
+        }
+        id++
+        return cell;
+    });
+}
+export const generateFoods = () => {
+    let id = 1;
+    return new Array(foodItems).fill("").map(() => {
+        const [left, top] = randomPositions();  
+        const food:IFood = {
+            id,
+            top,
+            left
+        }
+        id++;
+        return food;
+    });
+}

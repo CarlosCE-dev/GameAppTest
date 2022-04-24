@@ -1,17 +1,22 @@
 <template>
     <div class="grid" v-if="cells">
         <SquareCell v-for="(item) in cells" :cell="item" :key="item.id"/>
+        <Food v-for="(item) in foods" :cell="item" :key="item.id"/>
     </div>
 </template>
 
 <script setup lang="ts">
+// Components
 import SquareCell from "./SquareCell.vue";
+import Food from "./Food.vue";
+
+// Store
 import { useGameStore } from '../stores/game';
 import { storeToRefs } from "pinia";
 
 const store = useGameStore();
         
-const { cells } = storeToRefs(store);
+const { cells, foods } = storeToRefs(store);
 const { randomizePositions } = store;
 
 setInterval(() => {
