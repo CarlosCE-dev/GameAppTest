@@ -1,7 +1,7 @@
 <template>
     <div class="grid" v-if="cells">
         <Food v-for="(item) in foods" :food="item" :key="item.id"/>
-        <SquareCell v-for="(item) in cells" :cell="item" :key="item.id"/>
+        <SquareCell v-for="(item, index) in cells" :cell="item" :index="index" :key="item.id"/>
     </div>
 </template>
 

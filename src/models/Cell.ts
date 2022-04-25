@@ -8,7 +8,7 @@ export class Cell implements ICell {
     /**
      * Basic identifier of the cell
      */
-    id: number;
+    id: string;
     /**
      * The top position of the cell in the grid
      */
@@ -18,6 +18,10 @@ export class Cell implements ICell {
      */
     left: number;
     /**
+     * The color of the cell
+     */
+    color: string;
+    /**
      * Basic constructor
      * @param cell The ICell interface
      */
@@ -25,5 +29,6 @@ export class Cell implements ICell {
         this.id = cell.id;
         this.top = cell.top;
         this.left = cell.left;
+        this.color = cell.color;
     }
 }

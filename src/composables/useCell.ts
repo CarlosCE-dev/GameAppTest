@@ -17,8 +17,7 @@ export const useCell = (item:ICell) => {
      */
     const currentLevel = computed(() => {
         return convertToRoman(cell.value.level);
-    })
-
+    });
     return {
         currentLevel
     }

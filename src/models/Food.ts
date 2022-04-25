@@ -7,7 +7,7 @@ export class Food implements IFood {
     /**
      * Basic identifier of the food
      */
-    id: number;
+    id: string;
     /**
      * The top position of the food in the grid
      */

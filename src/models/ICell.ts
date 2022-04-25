@@ -6,9 +6,13 @@ export interface ICell extends IMovement {
     /**
      * Basic identifier of the cell
      */
-     id: number;
-     /**
-      * The current level of the cell
-      */
-     level: number;
+     id: string;
+    /**
+     * The current level of the cell
+     */
+    level: number;
+    /**
+     * The color cell
+     */
+    color: string;
 }

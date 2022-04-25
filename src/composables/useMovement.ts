@@ -24,7 +24,6 @@ export const useMovement = (item:IMovement) => {
             top: `${position.top}px`,
         };
     });
-
     return {
         styleCell,
     }

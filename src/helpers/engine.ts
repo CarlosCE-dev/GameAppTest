@@ -10,7 +10,6 @@ export const checkAllCellsPositions = (cells:ICell[], foods: IFood[]) => {
     for (let item of cells) {
         checkCurrentCell(item, cells, foods);
     }
-    console.log(foods);
     return {
         cells,
         foods
