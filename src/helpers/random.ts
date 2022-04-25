@@ -26,6 +26,10 @@ export const randomPositions = () => {
         Math.floor(Math.random() * (totalHeight - 0 + 1)) + 0
     ];
 }
+/**
+ * Generates a random color
+ * @returns Returns a new color in hex format
+ */
 export const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -34,6 +38,10 @@ export const getRandomColor = () => {
     }
     return color;
 }
+/**
+ * Generate unique id
+ * @returns Returns the new unique id
+ */
 export const generateUniqueId = () => {
   return (performance.now().toString(36)+Math.random().toString(36)).replace(/\./g,"");
 };

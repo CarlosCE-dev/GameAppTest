@@ -22,6 +22,10 @@ export class Cell implements ICell {
      */
     color: string;
     /**
+     * The basic position of the cell
+     */
+    position: number;
+    /**
      * Basic constructor
      * @param cell The ICell interface
      */
@@ -30,5 +34,6 @@ export class Cell implements ICell {
         this.top = cell.top;
         this.left = cell.left;
         this.color = cell.color;
+        this.position = cell.position;
     }
 }

@@ -15,4 +15,8 @@ export interface ICell extends IMovement {
      * The color cell
      */
     color: string;
+    /**
+     * The basic position of a cell
+     */
+    position: number;
 }

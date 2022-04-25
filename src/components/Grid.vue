@@ -24,7 +24,7 @@ setInterval(() => {
 }, 2000);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .grid {
     position: relative;
     width: 501px;

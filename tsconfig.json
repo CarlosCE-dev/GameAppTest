@@ -2,15 +2,17 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
+    "lib": ["es2017"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
   },
 
   "references": [
     {
       "path": "./tsconfig.vite-config.json"
     }
-  ]
+  ],
+  "lib": ["es2017"]
 }

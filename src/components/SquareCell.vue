@@ -1,8 +1,8 @@
 <template>
     <div class="cell" :style="styleCell">
         <div class="player" :style="playerStyle">
-            <div class="level">{{ currentLevel }}</div>
-            <span class="name">{{ index }}</span>
+            <div class="level" :style="textStyle">{{ currentLevel }}</div>
+            <span class="name" :style="textStyle">{{ index }}</span>
         </div>
     </div>
 </template>
@@ -11,6 +11,7 @@
 import { useCell } from '../composables/useCell';
 import type { ICell } from '../models/ICell';
 import { useMovement } from '../composables/useMovement';
+import { getCorrectColor } from '../helpers/view';
 
 const { cell, index } = defineProps<{
   cell: ICell,
@@ -18,13 +19,16 @@ const { cell, index } = defineProps<{
 }>()
 
 const playerStyle = {
-    backgroundColor: cell.color
+    backgroundColor: cell.color,
+};
+const textStyle = {
+    color: getCorrectColor(cell.color)
 }
 const { styleCell } = useMovement(cell);
 const { currentLevel } = useCell(cell);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .cell {
     position: absolute;
     width: 50px;
@@ -52,16 +56,12 @@ const { currentLevel } = useCell(cell);
     top: 0px;
     margin: 1px 1px;
     font-family: Arial, Helvetica, sans-serif;
-    color:white;
     font-size: 10px;
-    mix-blend-mode: difference;
 }
 
 .level {
-    mix-blend-mode: difference;
     font-size: 18px;
     font-weight: 600;
-    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;

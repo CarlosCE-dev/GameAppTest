@@ -17,7 +17,7 @@ const { food } = defineProps<{
 const { styleCell } = useMovement(food);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .cell {
     position: absolute;
     width: 50px;
