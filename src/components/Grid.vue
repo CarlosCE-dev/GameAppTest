@@ -19,13 +19,8 @@ const {
     cells,
     foods,
     totalCells,
-    cellsPerRow
+    gridStyles
 } = useGrid();
-
-const gridStyles = {
-    gridTemplateColumns: `repeat(${cellsPerRow}, 50px)`
-}
-
 </script>
 
 <style scoped lang="scss">

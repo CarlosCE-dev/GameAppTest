@@ -13,6 +13,9 @@ export const useGrid = () => {
     const { cells, foods, waiting } = storeToRefs(store);
     const { randomizePositions, checkPositions } = store;
     const isWaiting = ref(waiting);
+    const gridStyles = {
+        gridTemplateColumns: `repeat(${totalWidth + 1}, 50px)`
+    }
 
     setInterval(() => {
         if (!isWaiting.value) {
@@ -27,6 +30,6 @@ export const useGrid = () => {
         cells,
         foods,
         totalCells,
-        cellsPerRow: totalWidth + 1
+        gridStyles
     }
 }
