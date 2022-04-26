@@ -4,7 +4,7 @@ import type { ICell } from '../models/ICell';
 /**
  * Global variables
  */
-export const totalHeight = 10,
+export const totalHeight = 15,
     totalWidth = 5;
 /**
  * Gets next random position of cell

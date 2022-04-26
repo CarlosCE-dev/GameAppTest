@@ -1,14 +1,18 @@
 import type { ICell } from '../models/ICell';
 import { directionTypes } from '../enum/directions';
 import { getNextRandomPosition } from './random';
+
+export const levelRequired = 5;
 /**
  * Change all the position of the cells
  * @param cells Collections of cells
  * @returns Returns a collection of cell with the position changed
  */
-export const getNextPositions = (cells:ICell[]) => {
+export const getNextPositions = (cells:ICell[], level:number) => {
+    const minimunLevelRequired = level * 5;
     return cells.map(c => {
-        return setNewPosition(c);
+        if (c.level >= minimunLevelRequired) return setNewPosition(c);
+        return c;
     });
 }
 /**

@@ -3,7 +3,7 @@ import type { ICell } from "@/models/ICell";
 import type { IFood } from "@/models/IFood";
 
 const cellItems = 20,
-    foodItems = 10;
+    foodItems = 5;
 
 /**
  * Generates random data for test usage
