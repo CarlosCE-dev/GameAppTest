@@ -20,8 +20,9 @@ export const useMovement = (item:IMovement) => {
         };
         
         return {
-            left: `${position.left}px`,
-            top: `${position.top}px`,
+            transform: `translate(${position.left}px, ${position.top}px)`,
+            // left: `${position.left}px`,
+            // top: `${position.top}px`,
         };
     });
     return {

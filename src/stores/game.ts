@@ -11,17 +11,23 @@ export const useGameStore = defineStore({
     id: 'game',
     state: () => ({
         ...generateData(),
+        waiting: false
     }),
     actions: {
         randomizePositions(){
-            const foodTotal = this.foods.length
-            let {cells, foods} = checkAllCellsPositions(getNextPositions(this.cells), this.foods);
+            this.cells = getNextPositions(this.cells);
+            this.waiting = true;
+        },
+        checkPositions(){
+            const foodTotal = this.foods.length;
+            let {cells, foods} = checkAllCellsPositions(this.cells, this.foods);
             if (foodTotal !== foods.length) {
                 foods = generateFoods(cells, foods, foodTotal - foods.length);
             }
 
             this.cells = cells;
             this.foods = foods;
+            this.waiting = false;
         }
     }
 })

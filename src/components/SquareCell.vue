@@ -30,6 +30,8 @@ const { currentLevel } = useCell(cell);
 
 <style scoped lang="scss">
 .cell {
+    top: 0;
+    left: 0;
     position: absolute;
     width: 50px;
     height: 50px;
@@ -37,6 +39,11 @@ const { currentLevel } = useCell(cell);
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    -webkit-transition: all 0.2s ease 0.2s; 
+    -moz-transition: all 0.2s ease 0.2s;
+    -o-transition: all 0.2s ease 0.2s;
+    -ms-transition: all 0.2s ease 0.2s;
+    transition: all 0.2s ease 0.2s
 }
 
 .player {
@@ -48,6 +55,10 @@ const { currentLevel } = useCell(cell);
     width: 40px;
     height: 40px;
     border: black 1px solid;
+    transition:left 1s linear;
+    transition:right 1s linear;
+    transition:top 1s linear;
+    transition:bottom 1s linear;
 }
 
 .name {

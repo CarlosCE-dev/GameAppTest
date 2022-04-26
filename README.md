@@ -6,3 +6,4 @@
     - Specify duration of each round
 - [ ] Make player reduce level after eating
 - [ ] Make player movement based on current level
+- [ ] Fix index of playerse

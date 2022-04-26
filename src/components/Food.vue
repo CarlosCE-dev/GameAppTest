@@ -19,6 +19,8 @@ const { styleCell } = useMovement(food);
 
 <style scoped lang="scss">
 .cell {
+    top: 0;
+    left: 0;
     position: absolute;
     width: 50px;
     height: 50px;
@@ -33,5 +35,15 @@ const { styleCell } = useMovement(food);
     width: 20px;
     height: 20px;
     background-color: white;
+    animation: fadeIn 5s;
+    -webkit-animation: fadeIn .5s ease;
+    -moz-animation: fadeIn .5s ease;
+    -o-animation: fadeIn .5s ease;
+    -ms-animation: fadeIn .5s ease;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 </style>
