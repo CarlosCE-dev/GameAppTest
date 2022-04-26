@@ -5,6 +5,10 @@ import type { IFood } from "@/models/IFood";
 const cellItems = 40,
     foodItems = 15;
 
+/**
+ * Generates random data for test usage
+ * @returns A object with cells and foods
+ */
 export const generateData = () => {
     const cellsList:ICell[] = [], 
         foodsList:IFood[] = [];

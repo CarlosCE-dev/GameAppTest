@@ -10,6 +10,12 @@ export const shuffleArray = (array: any) => {
         swap(array, number, --last);
     }
 }
+/**
+ * Groups a list with a certain condition
+ * @param list The collect of items
+ * @param getKey The function filter
+ * @returns Returns the list in a group object
+ */
 export const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
   list.reduce((previous, currentItem) => {
     const group = getKey(currentItem);

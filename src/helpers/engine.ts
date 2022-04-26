@@ -1,27 +1,26 @@
 import type { ICell } from '../models/ICell';
 import type { IFood } from '../models/IFood';
-import type { IPosition } from '../models/IMovement';
 import { groupBy } from './array';
 
 /**
  * Check position of item in cell
- * @param newPosition 
- * @param positions 
- * @returns 
+ * @param newPosition A new position for a item
+ * @param positions Current postions occupated in a grid
+ * @returns Returns true or false if the position is available
  */
 export const checkPosition = ( newPosition: number, positions:number[] ) => {
     return positions.includes(newPosition);
 }
 /**
- * Check all the positions of the cells
- * @param cells 
- * @param foods 
- * @returns 
+ * Check all the positions of the cells each iteration of movement
+ * @param cells The collection of cell in the grid
+ * @param foods THe collection of food in the grid
+ * @returns Returns the current position of all items
  */
 export const checkAllCellsPositions = (cells:ICell[], foods: IFood[]) => {
     checkCellDuplicates(cells);
     for (let item of cells) {
-        checkCurrentCell(item, cells, foods);
+        checkCurrentCell(item, foods);
     }
     return {
         cells,
@@ -29,12 +28,11 @@ export const checkAllCellsPositions = (cells:ICell[], foods: IFood[]) => {
     }
 }
 /**
- * 
- * @param cell 
- * @param cells 
- * @param foods 
+ * Check current cell position and if it need to eat another cell
+ * @param cell The current cell
+ * @param foods The current foods collection available in the grid
  */
-const checkCurrentCell = (cell:ICell, cells:ICell[], foods: IFood[]) => {
+const checkCurrentCell = (cell:ICell, foods: IFood[]) => {
     const foodsPosition = foods.map(c => parseInt(`${c.left}${c.top}`)),
         cellPosition = parseInt(`${cell.left}${cell.top}`),
         foodEat = foodsPosition.find(f => f === cellPosition);
@@ -45,6 +43,10 @@ const checkCurrentCell = (cell:ICell, cells:ICell[], foods: IFood[]) => {
         foods.splice(foodIndex, 1);
     }
 }
+/**
+ * Check if two or more cells or in the same exact position
+ * @param cells List of cells
+ */
 const checkCellDuplicates = (cells:ICell[]) => {
     const items = cells.map(i => {
         i.position = parseInt(`${i.left}${i.top}`);
@@ -63,28 +65,18 @@ const checkCellDuplicates = (cells:ICell[]) => {
 
     const groups = groupBy(duplicates, i => i.position);
     for (const [_, values] of Object.entries(groups)) {
-        const sorted = values.sort((a, b) => a.level - b.level);
+        const tempArray = [...values];
+        const sorted = tempArray.sort((a, b) => a.level - b.level);
         sorted.reverse();
         const [first] = sorted;
         const sameLevel = sorted.filter(i => i.level === first.level);
-        console.log(sameLevel);
-        console.log(items.length)
         const result = sameLevel[Math.floor(Math.random()*sameLevel.length)];
 
         const itemsToRemove = sorted.filter(s => s.id !== result.id);
-
-        console.log("================================================================================================================");
-        console.log(`Cell winner: ${result.id}`);
-        console.log(`Level: ${result.level}`);
-        console.log("===========LOSERS===========");
         for (let item of itemsToRemove){
-            console.info(`Cell: ${item.id}`);
-            console.info(`Level: ${item.level}`);
             const cellIndex = cells.findIndex(f => f.id === item.id);
             cells.splice(cellIndex, 1);
-            console.log("-----")
         }
-        console.log("===========End===========");
     }
 }
 
