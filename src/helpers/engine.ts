@@ -1,7 +1,10 @@
+import { ZoneTypes } from '@/models/enums/ZoneTypes';
+import type { IZone } from '@/models/IZone';
 import type { ICell } from '../models/ICell';
 import type { IFood } from '../models/IFood';
 import { groupBy } from './array';
 
+export const itemsPerRound = 6;
 /**
  * Check position of item in cell
  * @param newPosition A new position for a item
@@ -78,5 +81,29 @@ const checkCellDuplicates = (cells: ICell[]) => {
             cells.splice(cellIndex, 1);
         }
     }
+}
+export const addDeadZones = (round:number, zones:IZone[]) => {
+    const itemsToSlice = round * itemsPerRound;
+    console.log(itemsToSlice);
+    let firstElements = zones.slice(0, itemsToSlice),
+        lastElements = zones.slice(zones.length - itemsToSlice),
+        elementIds = [...firstElements.map(f => f.id), ...lastElements.map(l => l.id)],
+        newZones = zones.filter(z => !elementIds.includes(z.id));
+
+    firstElements = firstElements.map( e => {
+        e.zoneType = ZoneTypes.deadZone;
+        return e;
+    });
+
+    lastElements = lastElements.map( e => {
+        e.zoneType = ZoneTypes.deadZone;
+        return e;
+    });
+    
+    return [
+        ...firstElements,
+        ...newZones,
+        ...lastElements
+    ]
 }
 

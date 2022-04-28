@@ -10,7 +10,7 @@ import { useMovement } from '../composables/useMovement';
 
 const { food } = defineProps<{
   food: IFood
-}>()
+}>();
 
 const { styleCell } = useMovement(food);
 </script>

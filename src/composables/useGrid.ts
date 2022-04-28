@@ -4,21 +4,15 @@ import { useGameStore } from '../stores/game';
 import { storeToRefs } from "pinia";
 
 // Helpers
-import { totalHeight, totalWidth } from '@/helpers/random';
 import { levelRequired } from '@/helpers/movement';
 
 export const useGrid = () => {
 
     const store = useGameStore();
-    const totalCells = (totalHeight + 1) * (totalWidth + 1);         
-    const { cells, foods, waiting, maxLevel } = storeToRefs(store);
+    const { cells, foods, waiting, maxLevel, zones } = storeToRefs(store);
     const { randomizePositions, checkPositions } = store;
     const isWaiting = ref(waiting);
     const currentMaxLevel = ref(maxLevel);
-    const gridStyles = {
-        gridTemplateColumns: `repeat(${totalWidth + 1}, 50px)`
-    }
-
     watch(isWaiting, (value) => {
         if (!value) changePositions();
     });
@@ -43,7 +37,6 @@ export const useGrid = () => {
     return {
         cells,
         foods,
-        totalCells,
-        gridStyles,
+        zones
     }
 }

@@ -1,8 +1,10 @@
 import { checkPosition } from './engine';
-import { generateUniqueId, getRandomColor, randomPositions } from '@/helpers/random';
+import { generateUniqueId, getRandomColor, randomPositions, totalHeight, totalWidth } from '@/helpers/random';
 import { uniqueNamesGenerator, names, type Config } from 'unique-names-generator';
 import type { ICell } from '@/models/ICell';
 import type { IFood } from '@/models/IFood';
+import type { IZone } from '@/models/IZone';
+import { ZoneTypes } from '@/models/enums/ZoneTypes';
 
 /**
  * Generate random cells for the grid
@@ -69,4 +71,29 @@ export const generateFoods = (cells:ICell[], foods:IFood[] = [], foodLength:numb
 
     return foods;
 }
+export const generateZones = () => {
+    const heightArray = Array.from({ length: totalHeight + 1 }, ( _, k ) => k),
+        widthArray = Array.from({ length: totalWidth + 1 }, ( _, k ) => k),
+        zones:IZone[] = [];
 
+    for (let top of heightArray) {
+        for (let left of widthArray) {
+            const zone:IZone = {
+                id: generateUniqueId(),
+                top,
+                left,
+                position: `${left}${top}`,
+                zoneType: ZoneTypes.default
+            }
+            zones.push(zone);
+        }
+    }
+    return zones;
+}
+export const generateZoneColor = (type:ZoneTypes) => {
+    return zoneColor[type];
+}
+const zoneColor = {
+    [ZoneTypes.default]: "#333",
+    [ZoneTypes.deadZone] : 'red'
+}

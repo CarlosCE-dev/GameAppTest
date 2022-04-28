@@ -1,25 +1,24 @@
 <template>
     <section>
-        <div class="grid" v-if="cells" :style="gridStyles">
-            <EmptyCell v-for="_ in totalCells"/>
+        <div class="grid" v-if="cells">
+            <Zone v-for="item in zones" :zone="item" :key="item.id"/>
             <Food v-for="item in foods" :food="item" :key="item.id"/>
-            <SquareCell v-for="item in cells" :cell="item" :key="item.id"/>
+            <Cell v-for="item in cells" :cell="item" :key="item.id"/>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
 // Components
-import SquareCell from "./SquareCell.vue";
+import Cell from "./Cell.vue";
 import Food from "./Food.vue";
-import EmptyCell from "./EmptyCell.vue";
+import Zone from "./Zone.vue";
 import { useGrid } from "@/composables/useGrid";
 
 const {
     cells,
     foods,
-    totalCells,
-    gridStyles,
+    zones
 } = useGrid();
 </script>
 

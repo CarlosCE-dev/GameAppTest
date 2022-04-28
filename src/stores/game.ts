@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { generateData } from '../data/db';
 import { getNextPositions } from '../helpers/movement';
-import { checkAllCellsPositions } from '../helpers/engine';
-import { generateFoods } from '../helpers/generation';
+import { addDeadZones, checkAllCellsPositions, itemsPerRound } from '../helpers/engine';
+import { generateFoods, generateZones } from '../helpers/generation';
 
 /**
  * Game store/logic for the app
@@ -11,7 +11,10 @@ export const useGameStore = defineStore({
     id: 'game',
     state: () => ({
         ...generateData(),
-        waiting: false
+        waiting: false,
+        zones: generateZones(),
+        turnZones: 0,
+        stage: 0,
     }),
     actions: {
         randomizePositions(currentLevel:number){
@@ -28,6 +31,16 @@ export const useGameStore = defineStore({
             this.cells = cells;
             this.foods = foods;
             this.waiting = false;
+            this.turnZones++;
+
+            const turn = Math.floor(this.turnZones / itemsPerRound);
+            if (turn > 0) {
+                console.log("Next stage");
+                this.turnZones = 0;
+                this.stage++
+                this.zones = addDeadZones(this.stage, this.zones);
+                console.log(this.zones);
+            }
         },
     },
     getters: {
