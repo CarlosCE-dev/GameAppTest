@@ -33,12 +33,17 @@ export const useGrid = () => {
         }
     }
     
-    changePositions();
+    const startGame = async () => {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        changePositions();
+    }
+    
+    startGame();
 
     return {
         cells,
         foods,
         totalCells,
-        gridStyles
+        gridStyles,
     }
 }

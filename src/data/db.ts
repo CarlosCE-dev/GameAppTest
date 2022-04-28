@@ -14,8 +14,8 @@ export const generateData = () => {
         foodsList:IFood[] = [];
     
     const cells = generateCells(cellsList, cellItems);
-    const foods = generateFoods(cellsList, foodsList, foodItems);
-
+    const foods = generateFoods(cells, foodsList, foodItems);
+    
     return {
         cells,
         foods

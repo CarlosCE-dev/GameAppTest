@@ -27,7 +27,7 @@ export class Cell implements ICell {
     /**
      * The basic position of the cell
      */
-    position: number;
+    position: string;
     /**
      * Player name
      */

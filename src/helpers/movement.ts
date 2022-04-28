@@ -9,7 +9,7 @@ export const levelRequired = 5;
  * @returns Returns a collection of cell with the position changed
  */
 export const getNextPositions = (cells:ICell[], level:number) => {
-    const minimunLevelRequired = level * 5;
+    const minimunLevelRequired = level * levelRequired;
     return cells.map(c => {
         if (c.level >= minimunLevelRequired) return setNewPosition(c);
         return c;

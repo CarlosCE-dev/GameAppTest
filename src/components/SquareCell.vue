@@ -13,9 +13,8 @@ import type { ICell } from '../models/ICell';
 import { useMovement } from '../composables/useMovement';
 import { getCorrectColor } from '../helpers/view';
 
-const { cell, index } = defineProps<{
-  cell: ICell,
-  index: number
+const { cell } = defineProps<{
+  cell: ICell
 }>()
 
 const playerStyle = {
@@ -56,10 +55,6 @@ const { currentLevel } = useCell(cell);
     width: 40px;
     height: 40px;
     border: black 1px solid;
-    transition:left 1s linear;
-    transition:right 1s linear;
-    transition:top 1s linear;
-    transition:bottom 1s linear;
 }
 
 .name {

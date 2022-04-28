@@ -1,10 +1,10 @@
 <template>
     <section>
         <div class="grid" v-if="cells" :style="gridStyles">
-            <EmptyCell v-for="(_) in totalCells"/>
+            <EmptyCell v-for="_ in totalCells"/>
+            <Food v-for="item in foods" :food="item" :key="item.id"/>
+            <SquareCell v-for="item in cells" :cell="item" :key="item.id"/>
         </div>
-        <Food v-for="(item) in foods" :food="item" :key="item.id"/>
-        <SquareCell v-for="(item, index) in cells" :cell="item" :index="index" :key="item.id"/>
     </section>
 </template>
 
@@ -19,7 +19,7 @@ const {
     cells,
     foods,
     totalCells,
-    gridStyles
+    gridStyles,
 } = useGrid();
 </script>
 

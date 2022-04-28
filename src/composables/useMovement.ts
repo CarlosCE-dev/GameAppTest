@@ -18,11 +18,8 @@ export const useMovement = (item:IMovement) => {
         const position = {
             left: movement.value.left * 50, top: movement.value.top * 50 
         };
-        
         return {
             transform: `translate(${position.left}px, ${position.top}px)`,
-            // left: `${position.left}px`,
-            // top: `${position.top}px`,
         };
     });
     return {

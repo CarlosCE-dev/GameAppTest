@@ -13,18 +13,18 @@ import type { IFood } from '@/models/IFood';
 export const generateCells = (cells:ICell[], cellLength:number) => {
     const items = new Array(cellLength).fill("");
     
-
     for (let _ of items) {
         let left, top;
-        const currentPositions = cells.map(c => parseInt(`${c.left}${c.top}`));
+        const currentPositions = cells.map(c => `${c.left}${c.top}`);
         do {
             [left, top] = randomPositions(); 
-        } while (checkPosition(parseInt(`${left}${top}`), currentPositions));
+        } while (checkPosition(`${left}${top}`, currentPositions));
 
+        const randomeColor = getRandomColor();
         const uniqueNamesConfig: Config = {
             dictionaries: [names],
             separator: '-',
-            seed: `${left}${top}`,
+            seed: randomeColor,
         };
         const characterName: string = uniqueNamesGenerator(uniqueNamesConfig);
         const cell:ICell = {
@@ -32,8 +32,8 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
             top,
             left,
             level: 1,
-            color: getRandomColor(),
-            position: 0,
+            color: randomeColor,
+            position: characterName,
             name: characterName
         }
         cells.push(cell);
@@ -48,16 +48,16 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
  * @param foodLength The total length of items that will be added
  * @returns Returns the new array with new foods
  */
-export const generateFoods = (cells:ICell[], foods:IFood[], foodLength:number) => {
+export const generateFoods = (cells:ICell[], foods:IFood[] = [], foodLength:number) => {
     const items = new Array(foodLength).fill(""),
-        currentCellsPosition = cells.map(c => parseInt(`${c.left}${c.top}`));
+        currentCellsPosition = cells.map(c => `${c.left}${c.top}`);
 
     for (let _ of items) {
-        let left, top;
-        const currentPositions = [...currentCellsPosition, ...foods.map(c => parseInt(`${c.left}${c.top}`))];
+        let left:number, top:number;
+        const currentPositions = [...currentCellsPosition, ...foods.map(c => `${c.left}${c.top}`)];
         do {
             [left, top] = randomPositions();
-        } while (checkPosition(parseInt(`${left}${top}`), currentPositions));
+        } while (checkPosition(`${left}${top}`, currentPositions));
 
         const food:IFood = {
             id: generateUniqueId(),

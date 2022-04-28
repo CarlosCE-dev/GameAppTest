@@ -8,7 +8,7 @@ import { groupBy } from './array';
  * @param positions Current postions occupated in a grid
  * @returns Returns true or false if the position is available
  */
-export const checkPosition = ( newPosition: number, positions:number[] ) => {
+export const checkPosition = (newPosition: string, positions: string[]) => {
     return positions.includes(newPosition);
 }
 /**
@@ -17,7 +17,7 @@ export const checkPosition = ( newPosition: number, positions:number[] ) => {
  * @param foods THe collection of food in the grid
  * @returns Returns the current position of all items
  */
-export const checkAllCellsPositions = (cells:ICell[], foods: IFood[]) => {
+export const checkAllCellsPositions = (cells: ICell[], foods: IFood[]) => {
     checkCellDuplicates(cells);
     for (let item of cells) {
         checkCurrentCell(item, foods);
@@ -32,12 +32,12 @@ export const checkAllCellsPositions = (cells:ICell[], foods: IFood[]) => {
  * @param cell The current cell
  * @param foods The current foods collection available in the grid
  */
-const checkCurrentCell = (cell:ICell, foods: IFood[]) => {
-    const foodsPosition = foods.map(c => parseInt(`${c.left}${c.top}`)),
-        cellPosition = parseInt(`${cell.left}${cell.top}`),
+const checkCurrentCell = (cell: ICell, foods: IFood[]) => {
+    const foodsPosition = foods.map(c => `${c.left}${c.top}`),
+        cellPosition = `${cell.left}${cell.top}`,
         foodEat = foodsPosition.find(f => f === cellPosition);
     if (foodEat) {
-        const food = foods.find(f => parseInt(`${f.left}${f.top}`) === foodEat) as IFood;
+        const food = foods.find(f => `${f.left}${f.top}` === cellPosition) as IFood;
         const foodIndex = foods.findIndex(f => f.id === food.id);
         cell.level++;
         foods.splice(foodIndex, 1);
@@ -47,19 +47,19 @@ const checkCurrentCell = (cell:ICell, foods: IFood[]) => {
  * Check if two or more cells or in the same exact position
  * @param cells List of cells
  */
-const checkCellDuplicates = (cells:ICell[]) => {
+const checkCellDuplicates = (cells: ICell[]) => {
     const items = cells.map(i => {
-        i.position = parseInt(`${i.left}${i.top}`);
+        i.position = `${i.left}${i.top}`;
         return i;
     });
 
-    let duplicates:ICell[] = [];
+    let duplicates: ICell[] = [];
     items.forEach((el, i) => {
         items.forEach((element, index) => {
-          if (i === index) return null;
-          if (element.position === el.position) {
-            if (!duplicates.includes(el)) duplicates.push(el);
-          }
+            if (i === index) return null;
+            if (element.position === el.position) {
+                if (!duplicates.includes(el)) duplicates.push(el);
+            }
         });
     });
 
@@ -70,10 +70,10 @@ const checkCellDuplicates = (cells:ICell[]) => {
         sorted.reverse();
         const [first] = sorted;
         const sameLevel = sorted.filter(i => i.level === first.level);
-        const result = sameLevel[Math.floor(Math.random()*sameLevel.length)];
+        const result = sameLevel[Math.floor(Math.random() * sameLevel.length)];
 
         const itemsToRemove = sorted.filter(s => s.id !== result.id);
-        for (let item of itemsToRemove){
+        for (let item of itemsToRemove) {
             const cellIndex = cells.findIndex(f => f.id === item.id);
             cells.splice(cellIndex, 1);
         }

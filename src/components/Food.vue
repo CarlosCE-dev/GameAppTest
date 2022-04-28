@@ -1,8 +1,6 @@
 <template>
     <div class="cell" :style="styleCell">
-        <div class="player">
-
-        </div>
+        <div class="player"></div>
     </div>
 </template>
 

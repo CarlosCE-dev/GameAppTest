@@ -1,11 +1,6 @@
 <template>
-    <div class="cell">
-    </div>
+    <div class="cell"></div>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style scoped lang="scss">
 .cell {
