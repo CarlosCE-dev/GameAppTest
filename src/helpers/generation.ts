@@ -1,6 +1,6 @@
 import { checkPosition } from './engine';
-import { generateUniqueId, randomPositions } from '@/helpers/random';
-import { getRandomColor } from './random';
+import { generateUniqueId, getRandomColor, randomPositions } from '@/helpers/random';
+import { uniqueNamesGenerator, names, type Config } from 'unique-names-generator';
 import type { ICell } from '@/models/ICell';
 import type { IFood } from '@/models/IFood';
 
@@ -12,6 +12,7 @@ import type { IFood } from '@/models/IFood';
  */
 export const generateCells = (cells:ICell[], cellLength:number) => {
     const items = new Array(cellLength).fill("");
+    
 
     for (let _ of items) {
         let left, top;
@@ -20,6 +21,12 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
             [left, top] = randomPositions(); 
         } while (checkPosition(parseInt(`${left}${top}`), currentPositions));
 
+        const uniqueNamesConfig: Config = {
+            dictionaries: [names],
+            separator: '-',
+            seed: `${left}${top}`,
+        };
+        const characterName: string = uniqueNamesGenerator(uniqueNamesConfig);
         const cell:ICell = {
             id: generateUniqueId(),
             top,
@@ -27,6 +34,7 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
             level: 1,
             color: getRandomColor(),
             position: 0,
+            name: characterName
         }
         cells.push(cell);
     }

@@ -1,8 +1,8 @@
 <template>
     <div class="cell" :style="styleCell">
         <div class="player" :style="playerStyle">
-            <div class="level" :style="textStyle">{{ currentLevel }}</div>
-            <span class="name" :style="textStyle">{{ index }}</span>
+            <span class="name" :style="textStyle">{{ cell.name }}</span>
+            <span class="level" :style="textStyle">{{ currentLevel }}</span>
         </div>
     </div>
 </template>
@@ -47,6 +47,7 @@ const { currentLevel } = useCell(cell);
 }
 
 .player {
+    line-height: 14px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -62,20 +63,11 @@ const { currentLevel } = useCell(cell);
 }
 
 .name {
-    position: absolute;
-    left: 0;
-    top: 0px;
-    margin: 1px 1px;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
 }
 
 .level {
     font-size: 18px;
     font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 </style>

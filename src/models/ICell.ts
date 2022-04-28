@@ -19,4 +19,8 @@ export interface ICell extends IMovement {
      * The basic position of a cell
      */
     position: number;
+    /**
+     * Player name
+     */
+    name: string;
 }

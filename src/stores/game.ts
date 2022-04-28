@@ -28,7 +28,7 @@ export const useGameStore = defineStore({
             this.cells = cells;
             this.foods = foods;
             this.waiting = false;
-        }
+        },
     },
     getters: {
         maxLevel: (state) => {

@@ -30,7 +30,6 @@ export const useGrid = () => {
             randomizePositions(index);
             await new Promise(resolve => setTimeout(resolve, 1000));
             checkPositions();
-            console.log("Next move");
         }
     }
     
