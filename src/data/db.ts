@@ -2,8 +2,8 @@ import { generateFoods, generateCells } from '../helpers/generation';
 import type { ICell } from "@/models/ICell";
 import type { IFood } from "@/models/IFood";
 
-const cellItems = 20,
-    foodItems = 10;
+// Globals
+import { Globals } from '@/global/globals';
 
 /**
  * Generates random data for test usage
@@ -13,8 +13,8 @@ export const generateData = () => {
     const cellsList:ICell[] = [], 
         foodsList:IFood[] = [];
     
-    const cells = generateCells(cellsList, cellItems);
-    const foods = generateFoods(cells, foodsList, foodItems);
+    const cells = generateCells(cellsList, Globals.cellItems);
+    const foods = generateFoods(cells, foodsList, Globals.foodItems);
     
     return {
         cells,

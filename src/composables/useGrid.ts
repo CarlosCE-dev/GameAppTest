@@ -3,8 +3,8 @@ import { ref, watch } from 'vue';
 import { useGameStore } from '../stores/game';
 import { storeToRefs } from "pinia";
 
-// Helpers
-import { levelRequired } from '@/helpers/movement';
+// Globals
+import { Globals } from '@/global/globals';
 
 /**
  * Custom grid hook for the app
@@ -24,7 +24,7 @@ export const useGrid = () => {
      * Change position
      */
     const changePositions = async () => {
-        const iterations = Math.floor(currentMaxLevel.value / levelRequired) + 1;
+        const iterations = Math.floor(currentMaxLevel.value / Globals.levelRequired) + 1;
         const slots = new Array(iterations).fill("");
         for (let index = 0; index < slots.length; index++) {
             randomizePositions(index);

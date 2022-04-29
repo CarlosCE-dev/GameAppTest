@@ -1,20 +1,15 @@
 import { DirectionTypes } from '../models/enums/DirectionTypes';
+import { Globals } from '@/global/globals';
 import { shuffleArray } from './array';
 import type { ICell } from '../models/ICell';
-/**
- * Global variables
- */
-export const totalHeight = 15,
-    totalWidth = 5;
+
 /**
  * Gets next random position of cell
  * @param cell 
  * @returns 
  */
-export const getNextRandomPosition = (cell: ICell) => {
-    const directions = getDirectionsAvailable(cell);
-    shuffleArray(DirectionTypes);
-    return directions[Math.floor(Math.random() * directions.length)];
+export const getAvailableDirections = (cell: ICell) => {
+    return getDirectionsAvailable(cell);
 }
 /**
  * Get a new random position on the grid
@@ -22,8 +17,8 @@ export const getNextRandomPosition = (cell: ICell) => {
  */
 export const randomPositions = () => {
     return [
-        Math.floor(Math.random() * (totalWidth - 0 + 1)) + 0,
-        Math.floor(Math.random() * (totalHeight - 0 + 1)) + 0
+        Math.floor(Math.random() * (Globals.totalWidth - 0 + 1)) + 0,
+        Math.floor(Math.random() * (Globals.totalHeight - 0 + 1)) + 0
     ];
 }
 /**
@@ -53,11 +48,11 @@ export const generateUniqueId = () => {
 const getDirectionsAvailable = (cell: ICell) => {
     if (cell.left === 0)
         return decideLeft(cell.top);
-    else if (cell.left === totalWidth)
+    else if (cell.left === Globals.totalWidth)
         return decideRight(cell.top);
     else if (cell.top === 0)
         return decideTop(cell.left);
-    else if (cell.top === totalHeight)
+    else if (cell.top === Globals.totalHeight)
         return decideDown(cell.left);
     else
         return [DirectionTypes.right, DirectionTypes.down, DirectionTypes.up, DirectionTypes.left];
@@ -70,7 +65,7 @@ const getDirectionsAvailable = (cell: ICell) => {
 const decideLeft = (top: number) => {
     if (top === 0)
         return [DirectionTypes.right, DirectionTypes.down];
-    else if (top === totalHeight)
+    else if (top === Globals.totalHeight)
         return [DirectionTypes.right, DirectionTypes.up];
     else
         return [DirectionTypes.right, DirectionTypes.down, DirectionTypes.up];
@@ -83,7 +78,7 @@ const decideLeft = (top: number) => {
 const decideRight = (top: number) => {
     if (top === 0)
         return [DirectionTypes.left, DirectionTypes.down];
-    else if (top === totalHeight)
+    else if (top === Globals.totalHeight)
         return [DirectionTypes.left, DirectionTypes.up];
     else
         return [DirectionTypes.left, DirectionTypes.down, DirectionTypes.up];
@@ -96,7 +91,7 @@ const decideRight = (top: number) => {
 const decideTop = (left: number) => {
     if (left === 0)
         return [DirectionTypes.down, DirectionTypes.left];
-    else if (left === totalWidth)
+    else if (left === Globals.totalWidth)
         return [DirectionTypes.down, DirectionTypes.right];
     else
         return [DirectionTypes.down, DirectionTypes.right, DirectionTypes.left];
@@ -109,7 +104,7 @@ const decideTop = (left: number) => {
 const decideDown = (left: number) => {
     if (left === 0)
         return [DirectionTypes.up, DirectionTypes.left];
-    else if (left === totalWidth)
+    else if (left === Globals.totalWidth)
         return [DirectionTypes.up, DirectionTypes.right];
     else
         return [DirectionTypes.up, DirectionTypes.right, DirectionTypes.left];

@@ -7,7 +7,11 @@ export enum ZoneTypes {
      */
     default,
     /**
-     * Dead zone type
+     * Dead zone top type
      */
-    deadZone
+    deadZoneTop,
+    /**
+     * Dead zone bottom type
+     */
+    deadZoneBottom,
 }

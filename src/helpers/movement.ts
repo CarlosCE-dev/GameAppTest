@@ -1,47 +1,74 @@
 import { DirectionTypes } from '@/models/enums/DirectionTypes';
-import { getNextRandomPosition } from './random';
+import { getAvailableDirections } from './random';
+import { Globals } from '@/global/globals';
 import type { ICell } from '../models/ICell';
+import type { IZone } from '@/models/IZone';
+import { ZoneTypes } from '../models/enums/ZoneTypes';
 
-export const levelRequired = 5;
 /**
  * Change all the position of the cells
  * @param cells Collections of cells
  * @returns Returns a collection of cell with the position changed
  */
-export const getNextPositions = (cells:ICell[], level:number) => {
-    const minimumLevelRequired = level * levelRequired;
+export const getNextPositions = (cells:ICell[], level:number, zones:IZone[]) => {
+    const minimumLevelRequired = level * Globals.levelRequired,
+        zonePositions = zones
+            .filter(z => 
+                z.zoneType == ZoneTypes.deadZoneBottom 
+                || z.zoneType === ZoneTypes.deadZoneTop
+            ).map(z => z.position);
+    
     return cells.map(c => {
-        if (c.level >= minimumLevelRequired) return setNewPosition(c);
+        if (c.level >= minimumLevelRequired) return checkNextMovement(c, zonePositions);
         return c;
     });
 }
-/**
- * Set a new position of a cell
- * @param cell The cell
- * @returns Returns a cell that was move
- */
-const setNewPosition = (cell:ICell) => {
-    const direction = getNextRandomPosition(cell);
-    return positionBuilder[direction](cell);
+const checkNextMovement = (item:ICell, zonePositions:string[]) => {
+    const cell = {...item},    
+        directions = getAvailableDirections(cell),
+        posiblePositions = directions.map((d) => {
+            return positionBuilder[d](cell)
+        });
+
+    const positions = [...posiblePositions].filter(p => !zonePositions.includes(p.position)),
+        position = positions[Math.floor(Math.random() * positions.length)];
+
+    item.left = position.left;
+    item.top = position.top;
+    item.position = position.position;
+
+    return item;
 }
 /**
  * Changes the cell position
  */
 const positionBuilder = {
     [DirectionTypes.down]: (cell:ICell) => {
-        cell.top++;
-        return cell;
+        return {
+            top: cell.top + 1,
+            left: cell.left,
+            position: `${cell.left}${cell.top + 1}`
+        };
     },
     [DirectionTypes.up]: (cell:ICell) => {
-        cell.top--;
-        return cell;
+        return {
+            top: cell.top - 1,
+            left: cell.left,
+            position: `${cell.left}${cell.top - 1}`
+        };
     },
     [DirectionTypes.left]: (cell:ICell) => {
-        cell.left--;
-        return cell;
+        return {
+            top: cell.top,
+            left: cell.left - 1,
+            position: `${cell.left - 1}${cell.top}`
+        };
     },
     [DirectionTypes.right]: (cell:ICell) => {
-        cell.left++;
-        return cell;
+        return {
+            top: cell.top,
+            left: cell.left + 1,
+            position: `${cell.left + 1}${cell.top}`
+        };
     },
 }

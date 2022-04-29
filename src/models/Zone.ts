@@ -27,7 +27,7 @@ export class Zone implements IZone {
     zoneType: ZoneTypes;
     /**
      * Basic constructor
-     * @param movement The IMovement interface
+     * @param zone The IMovement interface
      */
     constructor(zone:IZone) {
         this.id = zone.id;

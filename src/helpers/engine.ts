@@ -3,8 +3,8 @@ import type { IZone } from '@/models/IZone';
 import type { ICell } from '../models/ICell';
 import type { IFood } from '../models/IFood';
 import { groupBy } from './array';
+import { Globals } from '@/global/globals';
 
-export const itemsPerRound = 6;
 /**
  * Check position of item in cell
  * @param newPosition A new position for a item
@@ -89,20 +89,22 @@ const checkCellDuplicates = (cells: ICell[]) => {
  * @returns Returns a list of zones for the grid
  */
 export const addDeadZones = (round:number, zones:IZone[]) => {
-    const itemsToSlice = round * itemsPerRound;
-    console.log(itemsToSlice);
+    const itemsToSlice = round * Globals.itemsPerRound;
     let firstElements = zones.slice(0, itemsToSlice),
         lastElements = zones.slice(zones.length - itemsToSlice),
         elementIds = [...firstElements.map(f => f.id), ...lastElements.map(l => l.id)],
-        newZones = zones.filter(z => !elementIds.includes(z.id));
+        newZones = zones.filter(z => !elementIds.includes(z.id)),
+        lastZones = (Globals.totalWidth + 1) * 2;
+
+    if (lastZones > newZones.length) return zones;
 
     firstElements = firstElements.map( e => {
-        e.zoneType = ZoneTypes.deadZone;
+        e.zoneType = ZoneTypes.deadZoneTop;
         return e;
     });
 
     lastElements = lastElements.map( e => {
-        e.zoneType = ZoneTypes.deadZone;
+        e.zoneType = ZoneTypes.deadZoneBottom;
         return e;
     });
     
