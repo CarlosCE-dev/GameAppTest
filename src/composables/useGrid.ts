@@ -6,17 +6,23 @@ import { storeToRefs } from "pinia";
 // Helpers
 import { levelRequired } from '@/helpers/movement';
 
+/**
+ * Custom grid hook for the app
+ * @returns Returns a object for the grid
+ */
 export const useGrid = () => {
+    const store = useGameStore(),
+        { cells, foods, waiting, maxLevel, zones } = storeToRefs(store),
+        { randomizePositions, checkPositions } = store,
+        isWaiting = ref(waiting),
+        currentMaxLevel = ref(maxLevel);
 
-    const store = useGameStore();
-    const { cells, foods, waiting, maxLevel, zones } = storeToRefs(store);
-    const { randomizePositions, checkPositions } = store;
-    const isWaiting = ref(waiting);
-    const currentMaxLevel = ref(maxLevel);
     watch(isWaiting, (value) => {
         if (!value) changePositions();
     });
-
+    /**
+     * Change position
+     */
     const changePositions = async () => {
         const iterations = Math.floor(currentMaxLevel.value / levelRequired) + 1;
         const slots = new Array(iterations).fill("");
@@ -26,14 +32,14 @@ export const useGrid = () => {
             checkPositions();
         }
     }
-    
+    /**
+     * Start game
+     */
     const startGame = async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         changePositions();
     }
-    
     startGame();
-
     return {
         cells,
         foods,

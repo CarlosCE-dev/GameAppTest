@@ -15,14 +15,13 @@ import { getCorrectColor } from '../helpers/view';
 
 const { cell } = defineProps<{
   cell: ICell
-}>()
-
+}>();
 const playerStyle = {
     backgroundColor: cell.color,
 };
 const textStyle = {
     color: getCorrectColor(cell.color)
-}
+};
 const { styleCell } = useMovement(cell);
 const { currentLevel } = useCell(cell);
 </script>

@@ -1,6 +1,6 @@
-import type { ICell } from '../models/ICell';
-import { directionTypes } from '../enum/directions';
+import { DirectionTypes } from '@/models/enums/DirectionTypes';
 import { getNextRandomPosition } from './random';
+import type { ICell } from '../models/ICell';
 
 export const levelRequired = 5;
 /**
@@ -9,9 +9,9 @@ export const levelRequired = 5;
  * @returns Returns a collection of cell with the position changed
  */
 export const getNextPositions = (cells:ICell[], level:number) => {
-    const minimunLevelRequired = level * levelRequired;
+    const minimumLevelRequired = level * levelRequired;
     return cells.map(c => {
-        if (c.level >= minimunLevelRequired) return setNewPosition(c);
+        if (c.level >= minimumLevelRequired) return setNewPosition(c);
         return c;
     });
 }
@@ -28,19 +28,19 @@ const setNewPosition = (cell:ICell) => {
  * Changes the cell position
  */
 const positionBuilder = {
-    [directionTypes.down]: (cell:ICell) => {
+    [DirectionTypes.down]: (cell:ICell) => {
         cell.top++;
         return cell;
     },
-    [directionTypes.up]: (cell:ICell) => {
+    [DirectionTypes.up]: (cell:ICell) => {
         cell.top--;
         return cell;
     },
-    [directionTypes.left]: (cell:ICell) => {
+    [DirectionTypes.left]: (cell:ICell) => {
         cell.left--;
         return cell;
     },
-    [directionTypes.right]: (cell:ICell) => {
+    [DirectionTypes.right]: (cell:ICell) => {
         cell.left++;
         return cell;
     },

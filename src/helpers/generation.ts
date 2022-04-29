@@ -22,11 +22,11 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
             [left, top] = randomPositions(); 
         } while (checkPosition(`${left}${top}`, currentPositions));
 
-        const randomeColor = getRandomColor();
+        const randomColor = getRandomColor();
         const uniqueNamesConfig: Config = {
             dictionaries: [names],
             separator: '-',
-            seed: randomeColor,
+            seed: randomColor,
         };
         const characterName: string = uniqueNamesGenerator(uniqueNamesConfig);
         const cell:ICell = {
@@ -34,7 +34,7 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
             top,
             left,
             level: 1,
-            color: randomeColor,
+            color: randomColor,
             position: characterName,
             name: characterName
         }
@@ -71,6 +71,10 @@ export const generateFoods = (cells:ICell[], foods:IFood[] = [], foodLength:numb
 
     return foods;
 }
+/**
+ * Generate zones available in grid
+ * @returns Returns a collection of zones available in the grid
+ */
 export const generateZones = () => {
     const heightArray = Array.from({ length: totalHeight + 1 }, ( _, k ) => k),
         widthArray = Array.from({ length: totalWidth + 1 }, ( _, k ) => k),
@@ -90,9 +94,17 @@ export const generateZones = () => {
     }
     return zones;
 }
+/**
+ * Get a color for a zone based on its zoneType
+ * @param type ZoneType of a zone
+ * @returns Returns a color based on its zoneType
+ */
 export const generateZoneColor = (type:ZoneTypes) => {
     return zoneColor[type];
 }
+/**
+ * Colors available based on zoneType
+ */
 const zoneColor = {
     [ZoneTypes.default]: "#333",
     [ZoneTypes.deadZone] : 'red'

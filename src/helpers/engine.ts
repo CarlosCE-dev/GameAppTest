@@ -8,7 +8,7 @@ export const itemsPerRound = 6;
 /**
  * Check position of item in cell
  * @param newPosition A new position for a item
- * @param positions Current postions occupated in a grid
+ * @param positions Current positions occupied in a grid
  * @returns Returns true or false if the position is available
  */
 export const checkPosition = (newPosition: string, positions: string[]) => {
@@ -82,6 +82,12 @@ const checkCellDuplicates = (cells: ICell[]) => {
         }
     }
 }
+/**
+ * Add dead zones based on current round
+ * @param round The current round of the game
+ * @param zones All the zones available in the map
+ * @returns Returns a list of zones for the grid
+ */
 export const addDeadZones = (round:number, zones:IZone[]) => {
     const itemsToSlice = round * itemsPerRound;
     console.log(itemsToSlice);

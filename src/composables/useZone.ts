@@ -3,17 +3,17 @@ import type { IZone } from '@/models/IZone';
 import { computed, ref } from 'vue';
 
 /**
- * 
+ * Custom hook for a Zone item
  * @param item The IZone item 
  * @returns Returns the style of zone
  */
 export const useZone = (item:IZone) => {
     /**
-     * 
+     * Current zone of the map
      */
     const zone = ref(item);
     /**
-     * Left and top position of the cell
+     * Custom style of the zone
      */
     const styleZone = computed(() => {
         const position = {

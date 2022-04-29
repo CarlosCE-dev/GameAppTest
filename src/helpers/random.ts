@@ -1,4 +1,4 @@
-import { directionTypes } from '../enum/directions';
+import { DirectionTypes } from '../models/enums/DirectionTypes';
 import { shuffleArray } from './array';
 import type { ICell } from '../models/ICell';
 /**
@@ -13,7 +13,7 @@ export const totalHeight = 15,
  */
 export const getNextRandomPosition = (cell: ICell) => {
     const directions = getDirectionsAvailable(cell);
-    shuffleArray(directionTypes);
+    shuffleArray(DirectionTypes);
     return directions[Math.floor(Math.random() * directions.length)];
 }
 /**
@@ -60,7 +60,7 @@ const getDirectionsAvailable = (cell: ICell) => {
     else if (cell.top === totalHeight)
         return decideDown(cell.left);
     else
-        return [directionTypes.right, directionTypes.down, directionTypes.up, directionTypes.left];
+        return [DirectionTypes.right, DirectionTypes.down, DirectionTypes.up, DirectionTypes.left];
 }
 /**
  * Decides position on left
@@ -69,11 +69,11 @@ const getDirectionsAvailable = (cell: ICell) => {
  */
 const decideLeft = (top: number) => {
     if (top === 0)
-        return [directionTypes.right, directionTypes.down];
+        return [DirectionTypes.right, DirectionTypes.down];
     else if (top === totalHeight)
-        return [directionTypes.right, directionTypes.up];
+        return [DirectionTypes.right, DirectionTypes.up];
     else
-        return [directionTypes.right, directionTypes.down, directionTypes.up];
+        return [DirectionTypes.right, DirectionTypes.down, DirectionTypes.up];
 }
 /**
  * Decides position on right
@@ -82,11 +82,11 @@ const decideLeft = (top: number) => {
  */
 const decideRight = (top: number) => {
     if (top === 0)
-        return [directionTypes.left, directionTypes.down];
+        return [DirectionTypes.left, DirectionTypes.down];
     else if (top === totalHeight)
-        return [directionTypes.left, directionTypes.up];
+        return [DirectionTypes.left, DirectionTypes.up];
     else
-        return [directionTypes.left, directionTypes.down, directionTypes.up];
+        return [DirectionTypes.left, DirectionTypes.down, DirectionTypes.up];
 }
 /**
  * Decides position on tio
@@ -95,11 +95,11 @@ const decideRight = (top: number) => {
  */
 const decideTop = (left: number) => {
     if (left === 0)
-        return [directionTypes.down, directionTypes.left];
+        return [DirectionTypes.down, DirectionTypes.left];
     else if (left === totalWidth)
-        return [directionTypes.down, directionTypes.right];
+        return [DirectionTypes.down, DirectionTypes.right];
     else
-        return [directionTypes.down, directionTypes.right, directionTypes.left];
+        return [DirectionTypes.down, DirectionTypes.right, DirectionTypes.left];
 }
 /**
  * Decides position on down
@@ -108,9 +108,9 @@ const decideTop = (left: number) => {
  */
 const decideDown = (left: number) => {
     if (left === 0)
-        return [directionTypes.up, directionTypes.left];
+        return [DirectionTypes.up, DirectionTypes.left];
     else if (left === totalWidth)
-        return [directionTypes.up, directionTypes.right];
+        return [DirectionTypes.up, DirectionTypes.right];
     else
-        return [directionTypes.up, directionTypes.right, directionTypes.left];
+        return [DirectionTypes.up, DirectionTypes.right, DirectionTypes.left];
 }
