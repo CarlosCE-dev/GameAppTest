@@ -1,6 +1,7 @@
 import { generateFoods, generateCells } from '../helpers/generation';
 import type { ICell } from "@/models/ICell";
 import type { IFood } from "@/models/IFood";
+import type { IZone } from '@/models/IZone';
 
 // Globals
 import { Globals } from '@/global/globals';
@@ -11,10 +12,11 @@ import { Globals } from '@/global/globals';
  */
 export const generateData = () => {
     const cellsList:ICell[] = [], 
-        foodsList:IFood[] = [];
+        foodsList:IFood[] = [],
+        zonesList:IZone[] = [];
     
     const cells = generateCells(cellsList, Globals.cellItems);
-    const foods = generateFoods(cells, foodsList, Globals.foodItems);
+    const foods = generateFoods(cells, foodsList, Globals.foodItems, zonesList);
     
     return {
         cells,

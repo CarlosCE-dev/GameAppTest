@@ -112,6 +112,21 @@ export const addDeadZones = (round:number, zones:IZone[]) => {
         ...firstElements,
         ...newZones,
         ...lastElements
-    ]
+    ];
+}
+/**
+ * Remove foods from dead zone
+ * @param foods Current foods available in the grid
+ * @param zones Current zones in the grid
+ * @returns Returns a list of foods
+ */
+export const removeFoodFromDeadZones = (foods:IFood[], zones:IZone[]) => {
+    const zonePositions = zones
+        .filter(z =>
+            z.zoneType == ZoneTypes.deadZoneBottom 
+            || z.zoneType === ZoneTypes.deadZoneTop
+        )
+        .map(z => z.position);
+    return foods.filter(f => !zonePositions.includes(`${f.left}${f.top}`));
 }
 

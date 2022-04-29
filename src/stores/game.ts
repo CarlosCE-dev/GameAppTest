@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { generateData } from '../data/db';
 import { getNextPositions } from '../helpers/movement';
-import { addDeadZones, checkAllCellsPositions } from '../helpers/engine';
+import { addDeadZones, checkAllCellsPositions, removeFoodFromDeadZones } from '../helpers/engine';
 import { generateFoods, generateZones } from '../helpers/generation';
 import { Globals } from '@/global/globals';
 
@@ -30,10 +30,10 @@ export const useGameStore = defineStore({
          * Check positions of the cell
          */
         checkPositions(){
-            const foodTotal = this.foods.length;
             let {cells, foods} = checkAllCellsPositions(this.cells, this.foods);
-            if (foodTotal !== foods.length) {
-                foods = generateFoods(cells, foods, foodTotal - foods.length);
+            if (Globals.foodItems !== foods.length) {
+                const newTotal = Globals.foodItems - foods.length - this.stage;
+                foods = generateFoods(cells, foods, newTotal, this.zones);
             }
     
             this.cells = cells;
@@ -46,6 +46,7 @@ export const useGameStore = defineStore({
                 this.turnZones = 0;
                 this.stage++
                 this.zones = addDeadZones(this.stage, this.zones);
+                this.foods = removeFoodFromDeadZones(this.foods, this.zones);
             }
         },
     },

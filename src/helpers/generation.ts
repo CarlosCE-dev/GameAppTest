@@ -49,15 +49,24 @@ export const generateCells = (cells:ICell[], cellLength:number) => {
  * @param cells The current cells on the grid
  * @param foods The current foods on the grid
  * @param foodLength The total length of items that will be added
+ * @param zones 
  * @returns Returns the new array with new foods
  */
-export const generateFoods = (cells:ICell[], foods:IFood[] = [], foodLength:number) => {
+export const generateFoods = (cells:ICell[], foods:IFood[] = [], foodLength:number, zones:IZone[]) => {
+    if (foodLength < 0) return foods;
+
     const items = new Array(foodLength).fill(""),
-        currentCellsPosition = cells.map(c => `${c.left}${c.top}`);
+        currentCellsPosition = cells.map(c => `${c.left}${c.top}`),
+        zonePositions = zones
+            .filter(z =>
+                z.zoneType == ZoneTypes.deadZoneBottom 
+                || z.zoneType === ZoneTypes.deadZoneTop
+            )
+            .map(z => z.position);
 
     for (let _ of items) {
         let left:number, top:number;
-        const currentPositions = [...currentCellsPosition, ...foods.map(c => `${c.left}${c.top}`)];
+        const currentPositions = [...currentCellsPosition, ...foods.map(c => `${c.left}${c.top}`), ...zonePositions];
         do {
             [left, top] = randomPositions();
         } while (checkPosition(`${left}${top}`, currentPositions));

@@ -17,11 +17,11 @@ export class Globals {
     /**
      * Cell items
      */
-    static cellItems = 50;
+    static cellItems = 20;
     /**
      * Food items
      */
-    static foodItems = 30;
+    static foodItems = 10;
     /**
      * Level required
      */
