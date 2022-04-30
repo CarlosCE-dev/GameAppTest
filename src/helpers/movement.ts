@@ -1,9 +1,9 @@
 import { DirectionTypes } from '@/models/enums/DirectionTypes';
-import { getAvailableDirections } from './random';
+import { getAvailableDirections } from './direction';
 import { Globals } from '@/global/globals';
+import { ZoneTypes } from '../models/enums/ZoneTypes';
 import type { ICell } from '../models/ICell';
 import type { IZone } from '@/models/IZone';
-import { ZoneTypes } from '../models/enums/ZoneTypes';
 
 /**
  * Change all the position of the cells
