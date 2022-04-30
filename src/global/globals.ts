@@ -21,7 +21,7 @@ export class Globals {
     /**
      * Food items
      */
-    static foodItems = 10;
+    static foodItems = 15;
     /**
      * Level required
      */

@@ -89,7 +89,7 @@ const checkCellDuplicates = (cells: ICell[]) => {
  * @returns Returns a list of zones for the grid
  */
 export const addDeadZones = (round:number, zones:IZone[]) => {
-    const itemsToSlice = round * Globals.itemsPerRound;
+    const itemsToSlice = round * (Globals.totalWidth + 1);
     let firstElements = zones.slice(0, itemsToSlice),
         lastElements = zones.slice(zones.length - itemsToSlice),
         elementIds = [...firstElements.map(f => f.id), ...lastElements.map(l => l.id)],
