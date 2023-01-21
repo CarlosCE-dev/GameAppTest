@@ -1,4 +1,4 @@
-# vue-battle-royal-tik
+# game-app-test
 
 # To do
 - [ ] Make map more smaller
