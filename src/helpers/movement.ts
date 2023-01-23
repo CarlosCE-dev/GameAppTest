@@ -8,13 +8,14 @@ import type { IZone } from '@/models/IZone';
 /**
  * Change all the position of the cells
  * @param cells Collections of cells
+ * @param level The current level of a item
  * @returns Returns a collection of cell with the position changed
  */
 export const getNextPositions = (cells:ICell[], level:number, zones:IZone[]) => {
     const minimumLevelRequired = level * Globals.levelRequired,
         zonePositions = zones
             .filter(z => 
-                z.zoneType == ZoneTypes.deadZoneBottom 
+                z.zoneType === ZoneTypes.deadZoneBottom 
                 || z.zoneType === ZoneTypes.deadZoneTop
             ).map(z => z.position);
     
@@ -23,14 +24,19 @@ export const getNextPositions = (cells:ICell[], level:number, zones:IZone[]) => 
         return c;
     });
 }
+/**
+ * Check next movement of an item
+ * @param item The player item
+ * @param zonePositions The current zones of the grid
+ * @returns Returns the new player with new position.
+ */
 const checkNextMovement = (item:ICell, zonePositions:string[]) => {
     const cell = {...item},    
         directions = getAvailableDirections(cell),
-        posiblePositions = directions.map((d) => {
+        possiblePositions = directions.map((d) => {
             return positionBuilder[d](cell)
-        });
-
-    const positions = [...posiblePositions].filter(p => !zonePositions.includes(p.position)),
+        }),
+        positions = [...possiblePositions].filter(p => !zonePositions.includes(p.position)),
         position = positions[Math.floor(Math.random() * positions.length)];
 
     item.left = position.left;

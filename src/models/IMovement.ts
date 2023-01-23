@@ -12,7 +12,7 @@ export interface IMovement {
     left: number;
 }
 /**
- * 
+ * Basic position interface
  */
 export interface IPosition extends IMovement{
     /**

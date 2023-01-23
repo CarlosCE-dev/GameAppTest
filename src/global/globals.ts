@@ -26,4 +26,8 @@ export class Globals {
      * Level required
      */
     static levelRequired = 5;
+    /**
+     * Game speed in milliseconds
+     */
+    static gameSpeed = 1000;
 }

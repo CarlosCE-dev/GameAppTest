@@ -28,7 +28,7 @@ export const useGrid = () => {
         const slots = new Array(iterations).fill("");
         for (let index = 0; index < slots.length; index++) {
             randomizePositions(index);
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, Globals.gameSpeed));
             checkPositions();
         }
     }
@@ -36,7 +36,7 @@ export const useGrid = () => {
      * Start game
      */
     const startGame = async () => {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, Globals.gameSpeed));
         changePositions();
     }
     startGame();
