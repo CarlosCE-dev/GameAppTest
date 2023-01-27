@@ -13,14 +13,16 @@ import { Globals } from '@/global/globals';
 export const generateData = () => {
     const cellsList:ICell[] = [], 
         foodsList:IFood[] = [],
-        zonesList:IZone[] = [];
+        zonesList:IZone[] = [],
+        deadPlayers: ICell[] = [];
     
     const cells = generateCells(cellsList, Globals.cellItems);
     const foods = generateFoods(cells, foodsList, Globals.foodItems, zonesList);
     
     return {
         cells,
-        foods
+        foods,
+        deadPlayers
     }
 }
 

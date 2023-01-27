@@ -21,13 +21,14 @@ export const checkPosition = (newPosition: string, positions: string[]) => {
  * @returns Returns the current position of all items
  */
 export const checkAllCellsPositions = (cells: ICell[], foods: IFood[]) => {
-    checkCellDuplicates(cells);
+    const deadCells = checkCellDuplicates(cells);
     for (let item of cells) {
         checkCurrentCell(item, foods);
     }
     return {
         cells,
-        foods
+        foods,
+        deadCells
     }
 }
 /**
@@ -66,6 +67,7 @@ const checkCellDuplicates = (cells: ICell[]) => {
         });
     });
 
+    const playersDead: ICell[] = [];
     const groups = groupBy(duplicates, i => i.position);
     for (const [_, values] of Object.entries(groups)) {
         const tempArray = [...values];
@@ -77,10 +79,13 @@ const checkCellDuplicates = (cells: ICell[]) => {
 
         const itemsToRemove = sorted.filter(s => s.id !== result.id);
         for (let item of itemsToRemove) {
+            playersDead.push(item);
             const cellIndex = cells.findIndex(f => f.id === item.id);
             cells.splice(cellIndex, 1);
         }
     }
+
+    return playersDead;
 }
 /**
  * Add dead zones based on current round

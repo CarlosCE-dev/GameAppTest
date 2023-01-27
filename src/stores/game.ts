@@ -30,7 +30,8 @@ export const useGameStore = defineStore({
          * Check positions of the cell
          */
         checkPositions(){
-            let {cells, foods} = checkAllCellsPositions(this.cells, this.foods);
+            let {cells, foods, deadCells } = checkAllCellsPositions(this.cells, this.foods);
+            this.deadPlayers.push(...deadCells);
             if (Globals.foodItems !== foods.length) {
                 const newTotal = Globals.foodItems - foods.length - this.stage;
                 foods = generateFoods(cells, foods, newTotal, this.zones);
@@ -61,6 +62,20 @@ export const useGameStore = defineStore({
             items.sort((a, b) => a.level - b.level);
             items.reverse();
             return items[0].level;
+        },
+        /**
+         * Sort players by level
+         * @param state Current state
+         */
+        playersSorted: (state) => {
+            return state.cells.sort((a, b) => a.level - b.level).reverse();
+        },
+        /**
+         * Sort dead players by level
+         * @param state Current state
+         */
+        deadPlayersSorted: (state) => {
+            return state.deadPlayers.sort((a, b) => a.level - b.level).reverse();
         }
     }
 })

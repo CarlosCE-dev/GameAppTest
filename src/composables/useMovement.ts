@@ -10,7 +10,7 @@ export const useMovement = (item:IMovement) => {
     /**
      * Reactive item
      */
-     const movement = ref(item);
+    const movement = ref(item);
     /**
      * Left and top position of the cell
      */

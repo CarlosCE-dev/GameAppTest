@@ -1,10 +1,9 @@
 # game-app-test
 
 # To do
-- [ ] Make map more smaller
-- [ ] Change logic of grid
+- [/] Make map more smaller
 - [/] Specify duration of each round
-- [ ] Display leader board
+- [/] Display leader board
 - [ ] Make player reduce level after eating
 - [/] Make player movement based on current level
 - [/] Fix index of players
